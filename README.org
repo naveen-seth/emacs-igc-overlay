@@ -44,9 +44,10 @@ build-options using =.override=.
   }
 #+end_src
 
-* Warning
+* Notice
 
 I wrote this overlay mostly for personal use. I think the nix-community overlay
 is probably a better source for your Emacs overlay once they provide builds with
 igc. If I find the time (exams currently), I might try to create a pull request.
+This overlay will then be retired!
 Tested on Linux only.
