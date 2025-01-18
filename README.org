@@ -1,0 +1,50 @@
+#+TITLE: Nix Overlay for Emacs 'feature/igc' Branch Build
+
+This flake extends the [[https://github.com/nix-community/emacs-overlay][nix-community/emacs-overlay]] to provide Emacs with the
+new experimental garbage collector from Emacs [[https://git.savannah.gnu.org/cgit/emacs.git/?h=scratch/igc]["feature/igc" branch]].  
+The new GC is concurrent, incremental, generational, and thread-safe. 
+It is implemented using Ravenbrook's Memory Pool System ([[https://github.com/Ravenbrook/mps][ravenbrook/mps]]).  
+
+Effectively this should mean less GC pauses.
+
+* Usage
+
+Consume this flake's default overlay in your own config or use =nix build= / =nix run=.
+
+The overlay adds the `emacs-igc` package and adds derivation inputs
+=withBuildDetails= (default: =false=) and =withMpsAs= (default: ="yes"=).
+Enabling build-details fixes [[https://github.com/progfolio/elpaca/wiki/Usage-with-Nix#manually-setting-elpaca-core-date][this]] issue when using the Elpaca package manager on
+unstable Emacs builds from nixpkgs.
+
+#+begin_src nix
+  nix build <this-repo>#emacs-igc
+  # or (not in overlay)
+  nix build <this-repo>#emacs-igc-pgtk
+#+end_src
+
+#+begin_src nix
+  { pkgs, emacs-igc-overlay, ... }:
+  {
+    nixpkgs.overlays = [
+      emacs-igc-overlay.overlays.default
+    ];
+
+    environment.systemPackages = [
+      # Example build
+      (pkgs.emacs-igc.override {
+        withBuildDetails = true;
+       	withCompressInstall = false;
+       	withMpsAs = "debug";
+       	withPgtk = true;
+      })
+    ];
+  }
+#+end_src
+
+* Warning
+
+I mostly wrote this flake for personal usage before the the nix-community's
+overlay supports building Emacs with incremental GC and will retire updating
+this flake once they support the feature.
+If I find the time (exams currently), I will try to create a pull request to
+their repo.
