@@ -16,11 +16,14 @@ The overlay adds the `emacs-igc` package and adds derivation inputs
 Enabling build-details fixes [[https://github.com/progfolio/elpaca/wiki/Usage-with-Nix#manually-setting-elpaca-core-date][this]] issue when using the Elpaca package manager on
 unstable Emacs builds from nixpkgs.
 
-#+begin_src nix
-  nix build <this-repo>#emacs-igc
-  # or (not in overlay)
-  nix build <this-repo>#emacs-igc-pgtk
+#+begin_src bash
+  nix build "github:naveen-seth/emacs-igc-overlay"
+  # or
+  nix build "github:naveen-seth/emacs-igc-overlay"#emacs-igc-pgtk
 #+end_src
+
+The overlay only provides =emacs-igc= (and not =emacs-igc-pgtk=). Set other
+build-options using =.override=.
 
 #+begin_src nix
   { pkgs, emacs-igc-overlay, ... }:
@@ -48,3 +51,5 @@ overlay supports building Emacs with incremental GC and will retire updating
 this flake once they support the feature.
 If I find the time (exams currently), I will try to create a pull request to
 their repo.
+
+Tested on Linux only.
