@@ -2,7 +2,7 @@
 
 This flake extends the [[https://github.com/nix-community/emacs-overlay][nix-community/emacs-overlay]] to provide Emacs with the
 new experimental garbage collector from Emacs [[https://git.savannah.gnu.org/cgit/emacs.git/?h=scratch/igc]["feature/igc" branch]].  
-The new GC is concurrent, incremental, generational, and thread-safe. 
+The new GC is incremental, generational, and thread-safe. 
 It is implemented using Ravenbrook's Memory Pool System ([[https://github.com/Ravenbrook/mps][ravenbrook/mps]]).  
 
 Effectively this should mean less GC pauses.
