@@ -46,10 +46,7 @@ build-options using =.override=.
 
 * Warning
 
-I mostly wrote this flake for personal usage before the the nix-community's
-overlay supports building Emacs with incremental GC and will retire updating
-this flake once they support the feature.
-If I find the time (exams currently), I will try to create a pull request to
-their repo.
-
+I wrote this overlay mostly for personal use. I think the nix-community overlay
+is probably a better source for your Emacs overlay once they provide builds with
+igc. If I find the time (exams currently), I might try to create a pull request.
 Tested on Linux only.
